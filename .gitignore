@@ -1,0 +1,4 @@
+#  ignore below files
+dist/
+node_modules/
+.parcel-cache/
