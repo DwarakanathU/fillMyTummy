@@ -2,6 +2,11 @@ img {
     width: 100px;
 }
 
+.card-holder>img {
+    width: 200px;
+    height: 200px
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -15,3 +20,60 @@ li {
     list-style: none;
     padding: 10px;
 }
+
+.card-holder {
+
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    margin: 5px;
+    padding: 15px;
+}
+
+.body-card {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer_restaurantlist {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer_card {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 200px;
+    background-color: grey;
+    margin: 5px;
+}
+
+li {
+    list-style: none;
+    color: brown;
+    font-weight: bold;
+}
+
+.restaurant {
+    display: flex;
+
+}
+
+.restaurant_menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-item {
+    height: 100px;
+    width: 200px;
+    padding: 5px;
+    margin: 15px;
+}
+
+/*  shimmer card anination */
+
+
+/* End of ANimation */
