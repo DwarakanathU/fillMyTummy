@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Card from "../utils/Card";
 import Shimmer from "./Shimmer";
-import { filterData, useFetch } from "../utils/Helper";
+import { filterData } from "../utils/Helper";
 import { Link } from "react-router-dom";
 import { cloudinary_url } from "../utils/constants";
+import useFetch from "../utils/useFetch";
 
 const Body = () => {
   const [allRestuarant, setAllRestuarants] = useState([]);
   const [filteredRestaurents, setFliteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    restaurants();
-  }, [searchText]);
+  const restaurantData = useFetch(cloudinary_url);
+  console.log("inisde body", restaurantData);
+  useEffect(() => {}, [searchText]);
 
-  const restaurants = async () => {
-    let promise = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=14.6818877&lng=77.6005911"
-    );
-    let json = await promise.json();
-    const data = json?.data?.cards;
-    const filteredData = data
-      .filter((card) => card.cardType === "restaurant")
+  const getResto = async () => {
+    const data = restaurantData && restaurantData?.cards;
+    console.log(data, "cards");
+    const filteredData = await data
+      ?.filter((card) => card.cardType === "restaurant")
       .map((card) => card?.data?.data);
     setAllRestuarants(filteredData);
     setFliteredRestaurants(filteredData);

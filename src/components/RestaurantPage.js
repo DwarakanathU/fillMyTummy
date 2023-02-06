@@ -6,25 +6,20 @@ import Shimmer from "./Shimmer";
 
 const RestaurantPage = () => {
   const { resId } = useParams();
-
-  const data = useFetch(cloudinary_menu_url + resId);
-
-  const restaurantDetails = data;
-
   // const [restaurantDetails, setRestaurantDetails] = useState(null);
+
+  const restaurantDetails = useFetch(cloudinary_menu_url + resId);
 
   // useEffect(() => {
   //   getRestrantData();
   // }, []);
 
-  // function getRestrantData() {
-  //   const resData = fetch(cloudinary_menu_url + resId)
-  //     .then((response) => response.json())
-  //     .then((responseJSON) => {
-  //       setRestaurantDetails(responseJSON.data);
-  //       return responseJSON.data;
-  //     });
-  //   console.log(resData);
+  // async function getRestrantData() {
+  //   const resData = await fetch(cloudinary_menu_url + resId);
+  //   const responseData = await resData.json();
+  //   const resJson = responseData.data;
+  //   setRestaurantDetails(resJson);
+
   //   return resData.data;
   // }
 
@@ -46,8 +41,8 @@ const RestaurantPage = () => {
       </div>
       <div className="restaurant_menu">
         {Object.values(restaurantDetails?.menu?.items).map((item) => (
-          <Link to={"/restaurant/" + resId + "/" + item.id}>
-            <div key={item.id} className="card-item">
+          <Link to={"/restaurant/" + resId + "/" + item.id} key={item.id}>
+            <div className="card-item">
               <img src={cloudinary_image + item?.cloudinaryImageId} alt="" />
               <li>{item.name}</li>
             </div>
