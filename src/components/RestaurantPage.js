@@ -1,26 +1,32 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { cloudinary_image, cloudinary_menu_url } from "../utils/constants";
+import useFetch from "../utils/useFetch";
 import Shimmer from "./Shimmer";
 
 const RestaurantPage = () => {
   const { resId } = useParams();
-  const [restaurantDetails, setRestaurantDetails] = useState(null);
 
-  useEffect(() => {
-    getRestrantData();
-  }, []);
+  const data = useFetch(cloudinary_menu_url + resId);
 
-  function getRestrantData() {
-    const resData = fetch(cloudinary_menu_url + resId)
-      .then((response) => response.json())
-      .then((responseJSON) => {
-        setRestaurantDetails(responseJSON.data);
-        return responseJSON.data;
-      });
-    console.log(resData);
-    return resData.data;
-  }
+  const restaurantDetails = data;
+
+  // const [restaurantDetails, setRestaurantDetails] = useState(null);
+
+  // useEffect(() => {
+  //   getRestrantData();
+  // }, []);
+
+  // function getRestrantData() {
+  //   const resData = fetch(cloudinary_menu_url + resId)
+  //     .then((response) => response.json())
+  //     .then((responseJSON) => {
+  //       setRestaurantDetails(responseJSON.data);
+  //       return responseJSON.data;
+  //     });
+  //   console.log(resData);
+  //   return resData.data;
+  // }
 
   return !restaurantDetails ? (
     <Shimmer />
