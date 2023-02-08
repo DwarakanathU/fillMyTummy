@@ -12,20 +12,31 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
 
   const restaurantData = useFetch(cloudinary_url);
-  console.log("inisde body", restaurantData);
-  useEffect(() => {}, [searchText]);
+  // console.log("inisde body", restaurantData);
+  useEffect(() => {
+    getResto();
+  }, [searchText]);
 
   const getResto = async () => {
-    const data = restaurantData && restaurantData?.cards;
-    console.log(data, "cards");
-    const filteredData = await data
-      ?.filter((card) => card.cardType === "restaurant")
-      .map((card) => card?.data?.data);
-    setAllRestuarants(filteredData);
-    setFliteredRestaurants(filteredData);
+    // const resData = await fetch(cloudinary_url);
+    // const response = await resData.json();
+    // const newData = response?.data?.cards;
+    if (!restaurantData) {
+      return;
+    }
+    const newData = restaurantData?.cards;
+    console.log("new data", newData);
+    const filteredData = newData?.filter(
+      (card) => card.cardType === "restaurant"
+    );
+    const updatedData = filteredData.map((card) => card?.data?.data);
+    setAllRestuarants(updatedData);
+    setFliteredRestaurants(updatedData);
   };
 
-  if (!allRestuarant) return null;
+  if (!allRestuarant) {
+    return null;
+  }
 
   return allRestuarant.length === 0 ? (
     <Shimmer />
